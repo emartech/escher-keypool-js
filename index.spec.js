@@ -6,11 +6,11 @@ var config;
 var KeyPool = require('./');
 var KeyPoolError = require('./error');
 
-describe('KeyPool', function () {
+describe('KeyPool', function() {
 
-  describe('#getActiveKey', function () {
+  describe('#getActiveKey', function() {
 
-    it('should return the correct key for the service', function () {
+    it('should return the correct key for the service', function() {
       var rawKeyPool = [
         { keyId: 'sms_ums_v1', secret: 'secret2', acceptOnly: 0 },
         { keyId: 'suite_ums_v1', secret: '<Y>', acceptOnly: 1 },
@@ -25,7 +25,7 @@ describe('KeyPool', function () {
     });
 
 
-    it('should throw exception if no key is found for the requested service', function () {
+    it('should throw exception if no key is found for the requested service', function() {
       var keyPool = new KeyPool('[]');
 
       try {
@@ -39,7 +39,7 @@ describe('KeyPool', function () {
     });
 
 
-    it('should throw exception if no active key is found for the requested service', function () {
+    it('should throw exception if no active key is found for the requested service', function() {
       var rawKeyPool = [{ keyId: 'suite_ums_v1', secret: '<Y>', acceptOnly: 1 }];
       config = JSON.stringify(rawKeyPool);
 
@@ -56,7 +56,7 @@ describe('KeyPool', function () {
     });
 
 
-    it('should throw exception if the active key is ambiguous', function () {
+    it('should throw exception if the active key is ambiguous', function() {
       var rawKeyPool = [
         { keyId: 'suite_ums_v1', secret: '<Y>', acceptOnly: 0 },
         { keyId: 'suite_ums_v2', secret: '<X>', acceptOnly: 0 }
@@ -78,7 +78,7 @@ describe('KeyPool', function () {
 
     describe('without given keyId', function() {
 
-      it('should return the correct key for the service if only one namespace exists in the given keypool', function () {
+      it('should return the correct key for the service if only one namespace exists in the given keypool', function() {
         var rawKeyPool = [
           { keyId: 'suite_ums_v1', secret: '<Y>', acceptOnly: 1 },
           { keyId: 'suite_ums_v2', secret: '<X>', acceptOnly: 0 }
@@ -95,7 +95,7 @@ describe('KeyPool', function () {
       });
 
 
-      it('should throw exception if no key is found for the requested service', function () {
+      it('should throw exception if no key is found for the requested service', function() {
         var keyPool = new KeyPool('[]');
 
         try {
@@ -109,7 +109,7 @@ describe('KeyPool', function () {
       });
 
 
-      it('should throw exception if no active key is found for the requested service', function () {
+      it('should throw exception if no active key is found for the requested service', function() {
         var rawKeyPool = [{ keyId: 'suite_ums_v1', secret: '<Y>', acceptOnly: 1 }];
         config = JSON.stringify(rawKeyPool);
 
@@ -126,7 +126,7 @@ describe('KeyPool', function () {
       });
 
 
-      it('should throw exception if the active key is ambiguous', function () {
+      it('should throw exception if the active key is ambiguous', function() {
         var rawKeyPool = [
           { keyId: 'suite_ums_v1', secret: '<Y>', acceptOnly: 0 },
           { keyId: 'suite_ums_v2', secret: '<X>', acceptOnly: 0 }
@@ -150,9 +150,9 @@ describe('KeyPool', function () {
   });
 
 
-  describe('#getKeyDb', function () {
+  describe('#getKeyDb', function() {
 
-    it('should return a keyDb returning the correct keys', function () {
+    it('should return a keyDb returning the correct keys', function() {
       var rawKeyPool = [
         { keyId: 'sms_ums_v1', secret: '<Z>', acceptOnly: 0 },
         { keyId: 'suite_ums_v1', secret: '<Y>', acceptOnly: 1 },
@@ -173,12 +173,11 @@ describe('KeyPool', function () {
   });
 
 
-  function assertError(ex, type, code, message)
-  {
+  var assertError = function(ex, type, code, message) {
     expect(ex).to.be.instanceof(type);
     expect(ex.code).to.eql(code);
     expect(ex.message).to.eql(message);
-  }
+  };
 
 });
 
