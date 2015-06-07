@@ -9,7 +9,7 @@ var KeyPool = function(keyPoolJson) {
   try {
     this._keys = JSON.parse(keyPoolJson);
   } catch (ex) {
-    throw new KeyPoolError('invalid_keypool_json', ex);
+    throw new KeyPoolError('invalid_keypool_json', 'The provided string cannot be parsed as valid JSON');
   }
 };
 

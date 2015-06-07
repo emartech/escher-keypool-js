@@ -8,6 +8,24 @@ var KeyPoolError = require('./error');
 
 describe('KeyPool', function() {
 
+  describe('#init', function() {
+
+    it('throws an error if the keypool JSON cannot be parsed', function() {
+
+      var keyPool;
+
+      try {
+        keyPool = new KeyPool('{not a very valid json}');
+      } catch (ex) {
+        assertError(ex, KeyPoolError, 'invalid_keypool_json', 'The provided string cannot be parsed as valid JSON');
+        return;
+      }
+
+      throw new chai.AssertionError('Expected KeyPoolError(invalid_keypool_json) but nothing was thrown');
+    });
+
+  });
+
   describe('#getActiveKey', function() {
 
     it('should return the correct key for the service', function() {
