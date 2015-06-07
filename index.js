@@ -1,11 +1,16 @@
 'use strict';
 
 var _ = require('lodash');
+var KeyPoolError = require('./error');
 var logger = require('logentries-logformat')('key-pool');
 var ActiveKeyFilter = require('./active-key-filter');
 
 var KeyPool = function(keyPoolJson) {
-  this._keys = JSON.parse(keyPoolJson);
+  try {
+    this._keys = JSON.parse(keyPoolJson);
+  } catch (ex) {
+    throw new KeyPoolError('invalid_keypool_json', ex);
+  }
 };
 
 KeyPool.prototype = {
