@@ -32,4 +32,8 @@ KeyPool.prototype = {
 
 };
 
+KeyPool.create = function(keyPoolJson) {
+  return new KeyPool(keyPoolJson);
+};
+
 module.exports = KeyPool;

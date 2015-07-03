@@ -8,6 +8,32 @@ var KeyPoolError = require('./error');
 
 describe('KeyPool', function() {
 
+
+  describe('Static #create', function() {
+    var keyPool;
+
+    beforeEach(function() {
+      var rawKeyPool = JSON.stringify([
+        { keyId: 'suite_ums_v1', secret: 'secret', acceptOnly: 0 }
+      ]);
+
+      keyPool = KeyPool.create(rawKeyPool);
+    });
+
+
+    it('should create a new KeyPool object', function() {
+      expect(keyPool).to.be.instanceof(KeyPool);
+    });
+
+
+    it('should pass the key pool json to the new KeyPool', function() {
+      var key = keyPool.getActiveKey('suite_ums');
+      expect(key.keyId).to.eql('suite_ums_v1');
+    });
+
+  });
+
+
   describe('#init', function() {
 
     it('throws an error if the keypool JSON cannot be parsed', function() {
