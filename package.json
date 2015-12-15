@@ -1,6 +1,6 @@
 {
   "name": "escher-keypool",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,8 +10,7 @@
     "type": "git",
     "url": "https://github.com/emartech/escher-keypool-js.git"
   },
-  "pre-commit": [
-  ],
+  "pre-commit": [],
   "author": "Viktor Somodi <viktor.somodi@emarsys.com>",
   "license": "MIT",
   "bugs": {
