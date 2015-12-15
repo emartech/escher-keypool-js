@@ -4,15 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test mocha index.spec.js",
-    "code-style": "jscs $(find . -name \"*.js\" -not -path \"./node_modules/*\")"
+    "test": "NODE_ENV=test mocha index.spec.js"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/emartech/escher-keypool-js.git"
   },
   "pre-commit": [
-    "code-style"
   ],
   "author": "Viktor Somodi <viktor.somodi@emarsys.com>",
   "license": "MIT",
@@ -21,13 +19,12 @@
   },
   "homepage": "https://github.com/emartech/escher-keypool-js",
   "dependencies": {
-    "lodash": "3.3.1",
-    "logentries-logformat": "0.0.2"
+    "lodash": "3.10.1",
+    "logentries-logformat": "0.1.4"
   },
   "devDependencies": {
-    "chai": "2.1.0",
-    "jscs": "1.13.1",
-    "mocha": "2.1.0",
-    "pre-commit": "1.0.7"
+    "chai": "3.4.1",
+    "mocha": "2.3.4",
+    "pre-commit": "1.1.2"
   }
 }
