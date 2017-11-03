@@ -19,7 +19,7 @@
   "homepage": "https://github.com/emartech/escher-keypool-js",
   "dependencies": {
     "lodash": "3.10.1",
-    "logentries-logformat": "0.1.4"
+    "logentries-logformat": "0.2.0"
   },
   "devDependencies": {
     "chai": "3.4.1",
