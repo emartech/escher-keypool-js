@@ -1,12 +1,13 @@
 'use strict';
 
-var KeyPoolError = function(code, message) {
-  this.name = 'KeyPoolError';
-  this.code = code;
-  this.message = message;
-};
+class KeyPoolError extends Error {
+  constructor(code, message) {
+    super();
 
-KeyPoolError.prototype = new Error();
-
+    this.name = 'KeyPoolError';
+    this.code = code;
+    this.message = message;
+  }
+}
 
 module.exports = KeyPoolError;

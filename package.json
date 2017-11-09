@@ -1,6 +1,6 @@
 {
   "name": "escher-keypool",
-  "description": "",
+  "description": "Escher key management",
   "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=test mocha index.spec.js",
@@ -10,10 +10,9 @@
     "type": "git",
     "url": "https://github.com/emartech/escher-keypool-js.git"
   },
-  "pre-commit": [],
   "release": {
     "verifyConditions": {
-      "path": "./node_modules/semantic-release/dist/lib/plugin-noop.js"
+      "path": "./node_modules/semantic-release/src/lib/plugin-noop.js"
     }
   },
   "author": "Viktor Somodi <viktor.somodi@emarsys.com>",
@@ -23,13 +22,11 @@
   },
   "homepage": "https://github.com/emartech/escher-keypool-js",
   "dependencies": {
-    "lodash": "3.10.1",
     "logentries-logformat": "0.2.0"
   },
   "devDependencies": {
-    "chai": "3.4.1",
-    "mocha": "2.3.4",
-    "pre-commit": "1.1.2",
-    "semantic-release": "4.3.5"
+    "chai": "4.1.2",
+    "mocha": "4.0.1",
+    "semantic-release": "7.0.2"
   }
 }

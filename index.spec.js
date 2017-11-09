@@ -1,19 +1,19 @@
 'use strict';
 
-var chai = require('chai');
-var expect = chai.expect;
-var config;
-var KeyPool = require('./');
-var KeyPoolError = require('./error');
+const chai = require('chai');
+const expect = chai.expect;
+let config;
+const KeyPool = require('./');
+const KeyPoolError = require('./error');
 
 describe('KeyPool', function() {
 
 
   describe('Static #create', function() {
-    var keyPool;
+    let keyPool;
 
     beforeEach(function() {
-      var rawKeyPool = JSON.stringify([
+      const rawKeyPool = JSON.stringify([
         { keyId: 'suite_ums_v1', secret: 'secret', acceptOnly: 0 }
       ]);
 
@@ -27,7 +27,7 @@ describe('KeyPool', function() {
 
 
     it('should pass the key pool json to the new KeyPool', function() {
-      var key = keyPool.getActiveKey('suite_ums');
+      const key = keyPool.getActiveKey('suite_ums');
       expect(key.keyId).to.eql('suite_ums_v1');
     });
 
@@ -38,7 +38,7 @@ describe('KeyPool', function() {
 
     it('throws an error if the keypool JSON cannot be parsed', function() {
 
-      var keyPool;
+      let keyPool;
 
       try {
         keyPool = new KeyPool('{not a very valid json}');
@@ -55,14 +55,14 @@ describe('KeyPool', function() {
   describe('#getActiveKey', function() {
 
     it('should return the correct key for the service', function() {
-      var rawKeyPool = [
+      const rawKeyPool = [
         { keyId: 'sms_ums_v1', secret: 'secret2', acceptOnly: 0 },
         { keyId: 'suite_ums_v1', secret: '<Y>', acceptOnly: 1 },
         { keyId: 'suite_ums_v2', secret: '<X>', acceptOnly: 0 }
       ];
       config = JSON.stringify(rawKeyPool);
-      var keyPool = new KeyPool(config);
-      var key = keyPool.getActiveKey('suite_ums');
+      const keyPool = new KeyPool(config);
+      const key = keyPool.getActiveKey('suite_ums');
       expect(key.keyId).to.eql('suite_ums_v2');
       expect(key.secret).to.eql('<X>');
       expect(key.acceptOnly).to.be.undefined;
@@ -70,7 +70,7 @@ describe('KeyPool', function() {
 
 
     it('should throw exception if no key is found for the requested service', function() {
-      var keyPool = new KeyPool('[]');
+      const keyPool = new KeyPool('[]');
 
       try {
         keyPool.getActiveKey('suite_ums');
@@ -84,10 +84,10 @@ describe('KeyPool', function() {
 
 
     it('should throw exception if no active key is found for the requested service', function() {
-      var rawKeyPool = [{ keyId: 'suite_ums_v1', secret: '<Y>', acceptOnly: 1 }];
+      const rawKeyPool = [{ keyId: 'suite_ums_v1', secret: '<Y>', acceptOnly: 1 }];
       config = JSON.stringify(rawKeyPool);
 
-      var keyPool = new KeyPool(config);
+      const keyPool = new KeyPool(config);
 
       try {
         keyPool.getActiveKey('suite_ums');
@@ -101,13 +101,13 @@ describe('KeyPool', function() {
 
 
     it('should throw exception if the active key is ambiguous', function() {
-      var rawKeyPool = [
+      const rawKeyPool = [
         { keyId: 'suite_ums_v1', secret: '<Y>', acceptOnly: 0 },
         { keyId: 'suite_ums_v2', secret: '<X>', acceptOnly: 0 }
       ];
       config = JSON.stringify(rawKeyPool);
 
-      var keyPool = new KeyPool(config);
+      const keyPool = new KeyPool(config);
 
       try {
         keyPool.getActiveKey('suite_ums');
@@ -123,15 +123,15 @@ describe('KeyPool', function() {
     describe('without given keyId', function() {
 
       it('should return the correct key for the service if only one namespace exists in the given keypool', function() {
-        var rawKeyPool = [
+        const rawKeyPool = [
           { keyId: 'suite_ums_v1', secret: '<Y>', acceptOnly: 1 },
           { keyId: 'suite_ums_v2', secret: '<X>', acceptOnly: 0 }
         ];
         config = JSON.stringify(rawKeyPool);
 
-        var keyPool = new KeyPool(config);
+        const keyPool = new KeyPool(config);
 
-        var key = keyPool.getActiveKey();
+        const key = keyPool.getActiveKey();
 
         expect(key.keyId).to.eql('suite_ums_v2');
         expect(key.secret).to.eql('<X>');
@@ -140,7 +140,7 @@ describe('KeyPool', function() {
 
 
       it('should throw exception if no key is found for the requested service', function() {
-        var keyPool = new KeyPool('[]');
+        const keyPool = new KeyPool('[]');
 
         try {
           keyPool.getActiveKey();
@@ -154,10 +154,10 @@ describe('KeyPool', function() {
 
 
       it('should throw exception if no active key is found for the requested service', function() {
-        var rawKeyPool = [{ keyId: 'suite_ums_v1', secret: '<Y>', acceptOnly: 1 }];
+        const rawKeyPool = [{ keyId: 'suite_ums_v1', secret: '<Y>', acceptOnly: 1 }];
         config = JSON.stringify(rawKeyPool);
 
-        var keyPool = new KeyPool(config);
+        const keyPool = new KeyPool(config);
 
         try {
           keyPool.getActiveKey();
@@ -171,13 +171,13 @@ describe('KeyPool', function() {
 
 
       it('should throw exception if the active key is ambiguous', function() {
-        var rawKeyPool = [
+        const rawKeyPool = [
           { keyId: 'suite_ums_v1', secret: '<Y>', acceptOnly: 0 },
           { keyId: 'suite_ums_v2', secret: '<X>', acceptOnly: 0 }
         ];
         config = JSON.stringify(rawKeyPool);
 
-        var keyPool = new KeyPool(config);
+        const keyPool = new KeyPool(config);
 
         try {
           keyPool.getActiveKey();
@@ -197,15 +197,15 @@ describe('KeyPool', function() {
   describe('#getKeyDb', function() {
 
     it('should return a keyDb returning the correct keys', function() {
-      var rawKeyPool = [
+      const rawKeyPool = [
         { keyId: 'sms_ums_v1', secret: '<Z>', acceptOnly: 0 },
         { keyId: 'suite_ums_v1', secret: '<Y>', acceptOnly: 1 },
         { keyId: 'suite_ums_v2', secret: '<X>', acceptOnly: 0 }
       ];
       config = JSON.stringify(rawKeyPool);
 
-      var keyPool = new KeyPool(config);
-      var keyDb = keyPool.getKeyDb();
+      const keyPool = new KeyPool(config);
+      const keyDb = keyPool.getKeyDb();
 
 
       expect(keyDb('sms_ums_v1')).to.eql('<Z>');
@@ -217,7 +217,7 @@ describe('KeyPool', function() {
   });
 
 
-  var assertError = function(ex, type, code, message) {
+  const assertError = function(ex, type, code, message) {
     expect(ex).to.be.instanceof(type);
     expect(ex.code).to.eql(code);
     expect(ex.message).to.eql(message);

@@ -1,39 +1,36 @@
 'use strict';
 
-var _ = require('lodash');
-var KeyPoolError = require('./error');
-var logger = require('logentries-logformat')('key-pool');
-var ActiveKeyFilter = require('./active-key-filter');
+const KeyPoolError = require('./error');
+const logger = require('logentries-logformat')('key-pool');
+const ActiveKeyFilter = require('./active-key-filter');
 
-var KeyPool = function(keyPoolJson) {
-  try {
-    this._keys = JSON.parse(keyPoolJson);
-  } catch (ex) {
-    throw new KeyPoolError('invalid_keypool_json', 'The provided string cannot be parsed as valid JSON');
+class KeyPool {
+
+  static create(keyPoolJson) {
+    return new KeyPool(keyPoolJson);
   }
-};
 
-KeyPool.prototype = {
+  constructor(keyPoolJson) {
+    try {
+      this._keys = JSON.parse(keyPoolJson);
+    } catch (ex) {
+      throw new KeyPoolError('invalid_keypool_json', 'The provided string cannot be parsed as valid JSON');
+    }
+  }
 
-  getActiveKey: function(keyId) {
-    var activeKey = new ActiveKeyFilter(this._keys, keyId).filter();
+  getActiveKey(keyId) {
+    const activeKey = new ActiveKeyFilter(this._keys, keyId).filter();
     logger.log('activeKeyQuery', { request: keyId, served: activeKey.keyId });
     return activeKey;
-  },
+  }
 
-
-  getKeyDb: function() {
+  getKeyDb() {
     return function(keyId) {
-      var key = _.find(this._keys, { keyId: keyId });
+      const key = this._keys.find(key => key.keyId === keyId);
       logger.log('keyDbQuery', { request: keyId, found: !!key });
       return key ? key.secret : key;
     }.bind(this);
   }
-
-};
-
-KeyPool.create = function(keyPoolJson) {
-  return new KeyPool(keyPoolJson);
-};
+}
 
 module.exports = KeyPool;
