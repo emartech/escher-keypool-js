@@ -10,11 +10,6 @@
     "type": "git",
     "url": "https://github.com/emartech/escher-keypool-js.git"
   },
-  "release": {
-    "verifyConditions": {
-      "path": "./node_modules/semantic-release/src/lib/plugin-noop.js"
-    }
-  },
   "author": "Viktor Somodi <viktor.somodi@emarsys.com>",
   "license": "MIT",
   "bugs": {
