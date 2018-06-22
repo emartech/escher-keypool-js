@@ -7,8 +7,8 @@ class KeyDb {
 
   keepWithStartsWith(keyId) {
     this._keys = this._keys.filter(function candidateKeyFilter(key) {
-      return key.keyId.indexOf(keyId) === 0;
-    });
+      return this._getKeyWithoutVersion(key.keyId) === keyId;
+    }, this);
   }
 
   keepActives() {
@@ -28,6 +28,10 @@ class KeyDb {
   getFirst() {
     const firstKey = this._keys[0];
     return { keyId: firstKey.keyId, secret: firstKey.secret };
+  }
+
+  _getKeyWithoutVersion(keyId) {
+    return keyId.split('_').slice(0, -1).join('_');
   }
 }
 

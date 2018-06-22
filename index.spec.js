@@ -119,6 +119,18 @@ describe('KeyPool', function() {
       throw new chai.AssertionError('Expected KeyPoolError(ambiguous_active_key) but nothing was thrown');
     });
 
+    it('should detect ambigous keys only if the version matches', function() {
+      const rawKeyPool = [
+        { keyId: 'suite_ums_v1', secret: '<Y>', acceptOnly: 0 },
+        { keyId: 'suite_umsother_v2', secret: '<X>', acceptOnly: 0 }
+      ];
+      config = JSON.stringify(rawKeyPool);
+
+      const keyPool = new KeyPool(config);
+      const key = keyPool.getActiveKey('suite_ums');
+
+      expect(key).to.eql({keyId: 'suite_ums_v1', secret: '<Y>'});
+    });
 
     describe('without given keyId', function() {
 
