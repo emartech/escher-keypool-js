@@ -2,6 +2,7 @@
   "name": "escher-keypool",
   "description": "Escher key management",
   "main": "index.js",
+  "types": "escher-keypool.d.ts",
   "scripts": {
     "test": "NODE_ENV=test mocha index.spec.js",
     "semantic-release": "CI=true semantic-release"
