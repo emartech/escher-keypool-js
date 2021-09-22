@@ -20,8 +20,8 @@
     "logentries-logformat": "0.2.0"
   },
   "devDependencies": {
-    "chai": "4.1.2",
-    "mocha": "5.2.0",
+    "chai": "4.3.4",
+    "mocha": "6.2.3",
     "semantic-release": "15.5.0"
   }
 }
