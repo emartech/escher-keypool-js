@@ -1,7 +1,8 @@
 'use strict';
 
+const { createLogger } = require('@emartech/json-logger');
 const KeyPoolError = require('./error');
-const logger = require('logentries-logformat')('key-pool');
+const logger = createLogger('key-pool');
 const ActiveKeyFilter = require('./active-key-filter');
 
 class KeyPool {
@@ -20,14 +21,14 @@ class KeyPool {
 
   getActiveKey(keyId) {
     const activeKey = new ActiveKeyFilter(this._keys, keyId).filter();
-    logger.log('activeKeyQuery', { request: keyId, served: activeKey.keyId });
+    logger.info('activeKeyQuery', { request: keyId, served: activeKey.keyId });
     return activeKey;
   }
 
   getKeyDb() {
     return function(keyId) {
       const key = this._keys.find(key => key.keyId === keyId);
-      logger.log('keyDbQuery', { request: keyId, found: !!key });
+      logger.info('keyDbQuery', { request: keyId, found: !!key });
       return key ? key.secret : key;
     }.bind(this);
   }
