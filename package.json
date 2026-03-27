@@ -16,6 +16,9 @@
     "url": "https://github.com/emartech/escher-keypool-js/issues"
   },
   "homepage": "https://github.com/emartech/escher-keypool-js",
+  "engines": {
+    "node": ">=20"
+  },
   "dependencies": {
     "@emartech/json-logger": "9.2.2"
   },
