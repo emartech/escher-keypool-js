@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/emartech/escher-keypool-js",
   "dependencies": {
-    "@emartech/json-logger": "7.2.3"
+    "@emartech/json-logger": "8.1.1"
   },
   "devDependencies": {
     "chai": "6.2.2",
