@@ -43,5 +43,4 @@ jobs:
       - name: Publish package
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_PUBLISHER_TOKEN }}
         run: CI=true npm run semantic-release
