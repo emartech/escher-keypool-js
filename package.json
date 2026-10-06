@@ -20,8 +20,8 @@
     "@emartech/json-logger": "7.2.3"
   },
   "devDependencies": {
-    "chai": "6.2.2",
-    "mocha": "11.7.6",
-    "semantic-release": "25.0.5"
+    "chai": "6.3.0",
+    "mocha": "11.8.0",
+    "semantic-release": "25.0.9"
   }
 }
